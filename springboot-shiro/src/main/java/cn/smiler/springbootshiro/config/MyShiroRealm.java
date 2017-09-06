@@ -15,10 +15,11 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MyShiroRealm  extends AuthorizingRealm{
+public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
- private    UserInfoService userInfoService;
+    private UserInfoService userInfoService;
+
     /**
      * 进行角色的添加和权限的添加
      * Retrieves the AuthorizationInfo for the given principals from the underlying data store.  When returning
@@ -32,11 +33,11 @@ public class MyShiroRealm  extends AuthorizingRealm{
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
-        SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
-        UserInfo userInfo=(UserInfo)principals.getPrimaryPrincipal();
-        for (SysRole role:userInfo.getRoleList()) {
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        UserInfo userInfo = (UserInfo) principals.getPrimaryPrincipal();
+        for (SysRole role : userInfo.getRoleList()) {
             authorizationInfo.addRole(role.getRole());
-            for (SysPermission p:role.getPermissions()) {
+            for (SysPermission p : role.getPermissions()) {
                 authorizationInfo.addStringPermission(p.getPermission());
             }
         }
@@ -63,18 +64,18 @@ public class MyShiroRealm  extends AuthorizingRealm{
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
         //获取输入的账号
-        String username=(String)token.getPrincipal();
+        String username = (String) token.getPrincipal();
         System.out.println(token.getCredentials());
 
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        UserInfo userInfo=userInfoService.findByUsername(username);
+        UserInfo userInfo = userInfoService.findByUsername(username);
 
-        System.out.println("----->>userInfo="+userInfo);
-        if(userInfo == null){
+       // System.out.println("----->>userInfo=" + userInfo);
+        if (userInfo == null) {
             return null;
         }
-        SimpleAuthenticationInfo authorizationInfo=new SimpleAuthenticationInfo(
+        SimpleAuthenticationInfo authorizationInfo = new SimpleAuthenticationInfo(
                 userInfo,
                 userInfo.getPassword(),
                 ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+dalt
