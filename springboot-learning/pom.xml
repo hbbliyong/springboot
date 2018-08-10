@@ -13,5 +13,7 @@
 
 <modules>
     <module>springboot-exception</module>
+
+    <module>springboot2-kafka</module>
 </modules>
 </project>

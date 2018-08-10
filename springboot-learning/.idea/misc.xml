@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/springboot-exception/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot2-kafka/pom.xml" />
       </list>
     </option>
   </component>

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/springboot-exception/springboot-exception.iml" filepath="$PROJECT_DIR$/springboot-exception/springboot-exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-learning.iml" filepath="$PROJECT_DIR$/springboot-learning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot2-kafka/springboot2-kafka.iml" filepath="$PROJECT_DIR$/springboot2-kafka/springboot2-kafka.iml" />
     </modules>
   </component>
 </project>
